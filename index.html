@@ -70,7 +70,7 @@ p.lead{font-size:clamp(1rem,1.4vw,1.16rem);color:var(--ink-2);font-weight:300}
 .price-panel .cd-box b{color:var(--gold);font-size:20px}
 .price-panel .cd-box span{color:var(--muted)}
 
-nav{position:fixed;top:36px;left:0;right:0;z-index:50;transition:all .4s;border-bottom:1px solid transparent}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .4s;border-bottom:1px solid transparent}
 nav.scrolled{background:rgba(235,227,210,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--line-soft)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1180px;margin:0 auto}
 .logo{font-family:var(--serif);font-size:1.4rem;font-weight:700;letter-spacing:.24em;color:var(--ink)}
@@ -235,17 +235,6 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
 <div class="grain"></div>
 <div class="glow glow-1"></div>
 
-<!-- URGENCE -->
-<div class="announce">
-  <span>✦ <b>Offre exclusive</b> — économise 60%</span>
-  <span class="countdown" id="cd">
-    <span class="cd-box"><b class="js-j">06</b><span>Jours</span></span>
-    <span class="cd-box"><b class="js-h">00</b><span>H</span></span>
-    <span class="cd-box"><b class="js-m">00</b><span>Min</span></span>
-    <span class="cd-box"><b class="js-s">00</b><span>Sec</span></span>
-  </span>
-</div>
-
 <nav id="nav">
   <div class="nav-inner">
     <div class="logo">ÉMIA<span>.</span></div>
@@ -283,7 +272,6 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
     <div class="offer-box reveal">
       <div class="offer-inner">
         <div>
-          <span class="offer-badge">★ Offre exclusive · <span class="save">−60%</span></span>
           <h2>ÉMIA <span class="italic">Method</span></h2>
           <p class="lead">Le parcours signature ÉMIA. Une méthode pensée pour cultiver l'élégance, la discipline et la confiance dans chaque aspect de ta vie.</p>
           <ul class="offer-includes">
@@ -297,17 +285,7 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
             <div class="value-row"><span>ÉMIA BODY</span><span>49€</span></div>
             <div class="value-row"><span>ÉMIA NUTRITION</span><span>34€</span></div>
             <div class="value-row"><span>ÉMIA GLOW</span><span>34€</span></div>
-            <div class="value-row total"><span>Valeur totale</span><span>117€</span></div>
-            <span class="price-old">117€</span>
-            <div class="price-now">45<small>€</small></div>
-            <span class="price-save">✦ Économise 72€ aujourd'hui</span>
-            <span class="pp-cd-label">L'offre se termine dans</span>
-            <span class="countdown pp-countdown">
-              <span class="cd-box"><b class="js-j">06</b><span>Jours</span></span>
-              <span class="cd-box"><b class="js-h">00</b><span>H</span></span>
-              <span class="cd-box"><b class="js-m">00</b><span>Min</span></span>
-              <span class="cd-box"><b class="js-s">00</b><span>Sec</span></span>
-            </span>
+            <div class="price-now" style="margin-bottom:26px">117<small>€</small></div>
             <a href="https://5f5e-contact.systeme.io/c511d57e" class="btn btn-gold">Obtenir ÉMIA Method <span class="arrow">→</span></a>
             <p class="price-note">Accès immédiat · Paiement sécurisé</p>
           </div>
@@ -388,7 +366,7 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
       <div class="faq-item reveal"><button class="faq-q">À qui s'adressent les ebooks ÉMIA ? <span class="pm">+</span></button>
         <div class="faq-a"><p>Les ebooks ÉMIA s'adressent à toutes les femmes qui souhaitent transformer leur corps, leur alimentation et leur énergie. Aucun niveau requis — débutante ou confirmée, tu trouveras des conseils adaptés et applicables immédiatement.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q">Faut-il acheter les 3 ebooks ou peut-on commencer par un seul ? <span class="pm">+</span></button>
-        <div class="faq-a"><p>Chaque ebook est indépendant et complet. Tu peux commencer par celui qui correspond à ton objectif du moment. Les 3 ensembles forment cependant une méthode globale et les résultats sont décuplés lorsqu'ils sont combinés.</p></div></div>
+        <div class="faq-a"><p>Chaque ebook est indépendant et complet. Tu peux commencer par celui qui correspond à ton objectif du moment. Les 3 ensemble forment cependant une méthode globale et les résultats sont décuplés lorsqu'ils sont combinés.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q">Les conseils sont-ils adaptés à toutes les morphologies et modes de vie ? <span class="pm">+</span></button>
         <div class="faq-a"><p>Oui. Que tu travailles en bureau, que tu voyages souvent ou que tu manques de temps, les conseils sont pensés pour s'intégrer dans la vraie vie — sans perfection, sans culpabilité.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q">Est-ce que je reçois les ebooks immédiatement après l'achat ? <span class="pm">+</span></button>
@@ -432,20 +410,6 @@ document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>{
   document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
   if(!o)it.classList.add('open');
 }));
-/* COUNTDOWN — échéance fixe : dimanche 14 juin 2026 à 23:59 (heure de Paris, CEST = UTC+2).
-   Le compte à rebours tourne en automatique pour tous les visiteurs.
-   Pour changer la date, modifie la ligne ci-dessous (garder +02:00 l'été, +01:00 l'hiver à Paris). */
-const end = new Date('2026-06-25T18:00:00+02:00').getTime();
-function pad(n){return String(n).padStart(2,'0')}
-function set(cls,v){document.querySelectorAll('.'+cls).forEach(e=>e.textContent=v)}
-function tick(){
-  let d=end-Date.now(); if(d<0)d=0;
-  set('js-j',pad(Math.floor(d/86400000)));
-  set('js-h',pad(Math.floor(d/3600000)%24));
-  set('js-m',pad(Math.floor(d/60000)%60));
-  set('js-s',pad(Math.floor(d/1000)%60));
-}
-tick();setInterval(tick,1000);
 </script>
 </body>
 </html>
