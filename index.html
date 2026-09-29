@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
+  --announce-h:38px;
   /* ---- THEME BEIGE / BLANC CASSÉ ---- */
   --bg:#FCFCF7; --bg-2:#E1DDD3; --paper:#F2EFE9;
   --ink:#1C1813; --ink-2:#403930; --muted:#8C8170; --muted-2:#A89D8A;
@@ -70,7 +71,7 @@ p.lead{font-size:clamp(1rem,1.4vw,1.16rem);color:var(--ink-2);font-weight:300}
 .price-panel .cd-box b{color:var(--gold);font-size:20px}
 .price-panel .cd-box span{color:var(--muted)}
 
-nav{position:fixed;top:38px;left:0;right:0;z-index:50;transition:all .4s;border-bottom:1px solid transparent}
+nav{position:fixed;top:var(--announce-h);left:0;right:0;z-index:50;transition:top .3s,all .4s;border-bottom:1px solid transparent}
 nav.scrolled{background:rgba(235,227,210,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--line-soft)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1180px;margin:0 auto}
 .logo{font-family:var(--serif);font-size:1.4rem;font-weight:700;letter-spacing:.24em;color:var(--ink)}
@@ -82,7 +83,7 @@ nav.scrolled{background:rgba(235,227,210,.86);backdrop-filter:blur(18px);border-
 .nav-cta:hover{border-color:var(--gold);color:var(--gold)!important}
 
 /* HERO — centré, ÉMIA en haut */
-.hero{min-height:100vh;display:flex;align-items:center;padding:150px 0 60px;text-align:center}
+.hero{min-height:100vh;display:flex;align-items:center;padding:calc(var(--announce-h) + 112px) 0 60px;text-align:center}
 .hero .wrap{display:flex;flex-direction:column;align-items:center}
 .brandmark{font-family:var(--serif);font-weight:700;font-size:clamp(3.4rem,9vw,7rem);letter-spacing:.16em;color:var(--ink);line-height:.9;margin-bottom:10px}
 .brandmark .dot{color:var(--gold)}
@@ -209,13 +210,12 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
 }
 @media(max-width:680px){
   .wrap{padding:0 20px}.nav-inner{padding:14px 20px}
-  .announce{font-size:9px;letter-spacing:.05em;gap:7px;padding:8px 10px}
-  nav{top:34px}
+  .announce{font-size:9px;letter-spacing:.05em;gap:7px;padding:8px 10px;flex-direction:column}
   .cd-box{padding:3px 6px;min-width:34px}
   .cd-box b{font-size:14px}.cd-box span{font-size:7px}
   .price-panel .cd-box b{font-size:16px}
   .sec{padding:60px 0}
-  .hero{min-height:auto;padding:128px 0 50px}
+  .hero{min-height:auto;padding:calc(var(--announce-h) + 94px) 0 50px}
   .brandmark{font-size:clamp(3rem,16vw,4.6rem)}
   .brand-sub{font-size:8.5px;letter-spacing:.24em;margin-bottom:30px;line-height:1.6}
   .hero h1{font-size:clamp(2rem,8.6vw,2.7rem)}
@@ -434,6 +434,13 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
 <script>
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+const announceEl=document.getElementById('announce');
+function syncAnnounceH(){
+  document.documentElement.style.setProperty('--announce-h', announceEl.offsetHeight+'px');
+}
+syncAnnounceH();
+window.addEventListener('resize',syncAnnounceH);
+window.addEventListener('load',syncAnnounceH);
 /* COUNTDOWN — échéance fixe : 1er octobre 2026 à 00:00 (heure de Paris, CEST = UTC+2). */
 const end=new Date('2026-10-01T00:00:00+02:00').getTime();
 function pad(n){return String(n).padStart(2,'0')}
