@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --announce-h:38px;
+  --announce-h:0px;
   /* ---- THEME BEIGE / BLANC CASSÉ ---- */
   --bg:#FCFCF7; --bg-2:#E1DDD3; --paper:#F2EFE9;
   --ink:#1C1813; --ink-2:#403930; --muted:#8C8170; --muted-2:#A89D8A;
@@ -147,7 +147,7 @@ section{position:relative;z-index:2}
 .price-panel .pp-in{position:relative;z-index:2}
 .value-row{display:flex;justify-content:space-between;font-size:.84rem;color:var(--muted);padding:7px 0;border-bottom:1px dashed rgba(28,24,19,.16)}
 .value-row.total{color:var(--ink);font-weight:500;border-bottom:none;padding-top:12px;margin-bottom:18px}
-.price-old{font-size:1.1rem;color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(168,130,46,.6)}
+.price-old{display:inline-block;margin-top:16px;font-size:1.1rem;color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(168,130,46,.6)}
 .price-now{font-family:var(--serif);font-size:4.6rem;color:var(--gold);font-weight:700;line-height:1;margin:4px 0}
 .price-now small{font-size:1.4rem}
 .price-save{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:inline-block}
@@ -160,12 +160,12 @@ section{position:relative;z-index:2}
 .price-note{font-size:10.5px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
 
 /* VOLUMES */
-.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
-.prod-card{background:var(--paper);border:1px solid var(--line-soft);border-radius:8px;padding:34px 28px 32px;display:flex;flex-direction:column;transition:all .5s;box-shadow:0 14px 40px rgba(28,20,8,.05)}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:stretch}
+.prod-card{background:var(--paper);border:1px solid var(--line-soft);border-radius:8px;padding:34px 24px 30px;display:flex;flex-direction:column;transition:all .5s;box-shadow:0 14px 40px rgba(28,20,8,.05)}
 .prod-card:hover{transform:translateY(-8px);border-color:var(--line);box-shadow:0 26px 56px rgba(28,20,8,.1)}
 .prod-card.feat{border-color:rgba(201,168,76,.4);box-shadow:0 22px 56px rgba(168,130,46,.14)}
 .prod-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-align:center}
-.prod-card h3{font-size:1.55rem;text-align:center;margin:8px 0 4px;color:var(--ink);text-transform:uppercase;letter-spacing:.06em}
+.prod-card h3{font-size:1.25rem;white-space:nowrap;text-align:center;margin:8px 0 4px;color:var(--ink);text-transform:uppercase;letter-spacing:.06em}
 .prod-price{font-family:var(--serif);font-size:2.1rem;color:var(--ink);text-align:center;font-weight:700;margin-bottom:22px}
 .prod-list{list-style:none;margin-bottom:24px;flex-grow:1}
 .prod-list li{font-size:.85rem;color:var(--ink-2);padding:9px 0 9px 24px;border-bottom:1px solid var(--line-soft);position:relative}
@@ -248,21 +248,39 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
   .hero-actions .btn{width:100%;justify-content:center}
   .guar{min-width:100%}
 }
+
+/* GRILLE VOLUMES 4 COLONNES -> 2 -> 1 */
+@media(max-width:1180px){.prod-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* LOGO FOOTER */
+.foot-logo-img{height:84px;width:auto;display:block;border-radius:4px;box-shadow:0 6px 18px rgba(28,20,8,.25)}
+
+/* CHOIX DU PACK */
+.choice-overlay{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(22,19,14,.55);backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s}
+.choice-overlay.open{opacity:1;visibility:visible}
+.choice-box{position:relative;width:100%;max-width:640px;background:var(--bg);border:1px solid rgba(168,130,46,.4);border-radius:12px;padding:46px 36px 38px;text-align:center;box-shadow:0 40px 90px rgba(28,20,8,.35);transform:translateY(18px) scale(.98);transition:transform .45s cubic-bezier(.2,.7,.3,1)}
+.choice-overlay.open .choice-box{transform:none}
+.choice-box::after{content:"";position:absolute;inset:8px;border:1px solid rgba(168,130,46,.25);border-radius:7px;pointer-events:none}
+.choice-box h3{font-size:clamp(1.7rem,3.4vw,2.2rem);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 28px}
+.choice-close{position:absolute;top:14px;right:18px;z-index:3;background:none;border:none;cursor:pointer;font-size:30px;line-height:1;color:var(--muted);transition:color .3s}
+.choice-close:hover{color:var(--gold)}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;z-index:2}
+.choice-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:28px 18px 24px;background:var(--paper);border:1px solid var(--line);border-radius:8px;text-decoration:none;transition:all .4s}
+.choice-card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 20px 44px rgba(168,130,46,.2)}
+.choice-tag{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.choice-card strong{font-family:var(--serif);font-size:1.45rem;font-weight:700;color:var(--ink);line-height:1.1;margin-top:4px}
+.choice-card small{font-size:.8rem;color:var(--muted);margin-bottom:14px}
+.choice-go{margin-top:auto;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--ink);border-bottom:1px solid var(--gold);padding-bottom:3px}
+.choice-card:hover .choice-go{color:var(--gold)}
+@media(max-width:600px){
+  .choice-box{padding:44px 20px 28px}
+  .choice-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 <div class="grain"></div>
 <div class="glow glow-1"></div>
-
-<div class="announce" id="announce">
-  <span>✦ <b>eBook ÉMIA BODY HOME offert</b> avec ÉMIA Method</span>
-  <span class="countdown" id="cd">
-    <span class="cd-box"><b class="js-j">00</b><span>Jours</span></span>
-    <span class="cd-box"><b class="js-h">00</b><span>H</span></span>
-    <span class="cd-box"><b class="js-m">00</b><span>Min</span></span>
-    <span class="cd-box"><b class="js-s">00</b><span>Sec</span></span>
-  </span>
-</div>
 
 <nav id="nav">
   <div class="nav-inner">
@@ -302,7 +320,6 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
     <div class="offer-box reveal">
       <div class="offer-inner">
         <div>
-          <span class="offer-badge">★ eBook ÉMIA BODY HOME offert</span>
           <h2>ÉMIA <span class="italic">Method</span></h2>
           <p class="lead">Le parcours signature ÉMIA. Une méthode pensée pour cultiver l'élégance, la discipline et la confiance dans chaque aspect de ta vie.</p>
           <ul class="offer-includes">
@@ -319,19 +336,8 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
             <div class="value-row"><span>ÉMIA GLOW</span><span>34€</span></div>
             <div class="value-row"><span>ÉMIA BODY HOME</span><span>49€</span></div>
             <span class="price-old">166€</span>
-            <div class="price-now" style="margin-bottom:10px">70<small>€</small></div>
-            <span class="price-save">✦ eBook ÉMIA BODY HOME offert</span>
-            <div class="urgency-flag"><span class="dot"></span>Plus que 2 places · 8 déjà précommandées</div>
-            <a href="https://5f5e-contact.systeme.io/c511d57e" class="btn btn-gold">Obtenir ÉMIA Method <span class="arrow">→</span></a>
-            <div class="pp-timer">
-              <span class="pp-cd-label">Offre valable jusqu'au 1ᵉʳ octobre</span>
-              <span class="countdown pp-countdown">
-                <span class="cd-box"><b class="js-j">00</b><span>Jours</span></span>
-                <span class="cd-box"><b class="js-h">00</b><span>H</span></span>
-                <span class="cd-box"><b class="js-m">00</b><span>Min</span></span>
-                <span class="cd-box"><b class="js-s">00</b><span>Sec</span></span>
-              </span>
-            </div>
+            <div class="price-now" style="margin-bottom:22px">70<small>€</small></div>
+            <button type="button" class="btn btn-gold" id="openChoice">Obtenir ÉMIA Method <span class="arrow">→</span></button>
             <p class="price-note">Accès immédiat · Paiement sécurisé</p>
           </div>
         </div>
@@ -347,7 +353,7 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
     <div class="prod-grid">
       <!-- BODY -->
       <div class="prod-card feat reveal d1">
-        <div class="prod-label">Volume I — Transformation</div><h3>ÉMIA BODY</h3>
+        <div class="prod-label">Volume I · Transformation</div><h3>ÉMIA BODY</h3>
         <div class="prod-price">49€</div>
         <ul class="prod-list">
           <li>ÉMIA Méthod — Challenge 12 semaines</li>
@@ -361,7 +367,7 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
       </div>
       <!-- NUTRITION -->
       <div class="prod-card reveal d2">
-        <div class="prod-label">Volume II — Nutrition</div><h3>ÉMIA NUTRITION</h3>
+        <div class="prod-label">Volume II · Nutrition</div><h3>ÉMIA NUTRITION</h3>
         <div class="prod-price">34€</div>
         <ul class="prod-list">
           <li>Les fondations : manger anti-inflammatoire</li>
@@ -375,7 +381,7 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
       </div>
       <!-- GLOW -->
       <div class="prod-card reveal d3">
-        <div class="prod-label">Volume III — Glow</div><h3>ÉMIA GLOW</h3>
+        <div class="prod-label">Volume III · Glow</div><h3>ÉMIA GLOW</h3>
         <div class="prod-price">34€</div>
         <ul class="prod-list">
           <li>Challenge Glow Up 30 jours</li>
@@ -386,6 +392,20 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
           <li>Devenir magnétique</li>
         </ul>
         <a href="https://5f5e-contact.systeme.io/c511d57e-fd2334bc-44c1ac7a-ea369c06" class="btn btn-ghost">Choisir</a>
+      </div>
+      <!-- BODY HOME -->
+      <div class="prod-card reveal d4">
+        <div class="prod-label">Volume IV · Home</div><h3>ÉMIA BODY HOME</h3>
+        <div class="prod-price">49€</div>
+        <ul class="prod-list">
+          <li>ÉMIA Method Home · Challenge 90 jours</li>
+          <li>Bibliothèque d'exercices complète</li>
+          <li>Rôle du Renforcement, Mobilité &amp; Cardio</li>
+          <li>Rituels pour rester régulière</li>
+          <li>Carnet de suivi &amp; Progression</li>
+          <li>Des routines express pour les journées chargées</li>
+        </ul>
+        <a href="https://5f5e-contact.systeme.io/c511d57e-fd2334bc-44c1ac7a-ea369c06-a72db05d" class="btn btn-ghost">Choisir</a>
       </div>
     </div>
   </div>
@@ -434,9 +454,9 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <div><div class="foot-logo">ÉMIA<span>.</span></div><div class="foot-tag">The Art of Becoming Her</div></div>
+      <div><img class="foot-logo-img" src="data:image/jpeg;base64,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" alt="ÉMIA"><div class="foot-tag">The Art of Becoming Her</div></div>
       <div class="foot-cols">
-        <div class="foot-col"><h5>Collection</h5><a href="#volumes">ÉMIA BODY</a><a href="#volumes">ÉMIA NUTRITION</a><a href="#volumes">ÉMIA GLOW</a><a href="#pack">ÉMIA Method</a></div>
+        <div class="foot-col"><h5>Collection</h5><a href="#volumes">ÉMIA BODY</a><a href="#volumes">ÉMIA NUTRITION</a><a href="#volumes">ÉMIA GLOW</a><a href="#volumes">ÉMIA BODY HOME</a><a href="#pack">ÉMIA Method</a><a href="#pack">ÉMIA METHOD HOME</a></div>
         <div class="foot-col"><h5>Infos</h5><a href="#faq">FAQ</a><a href="#acces">Accès</a><a href="https://www.instagram.com/emiegms" target="_blank" rel="noopener">Contact · Instagram</a></div>
         <div class="foot-col"><h5>Légal</h5><a href="#">Mentions légales</a><a href="#">CGV</a><a href="#">Confidentialité</a></div>
       </div>
@@ -445,30 +465,44 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 34px;background:var(
   </div>
 </footer>
 
+<!-- CHOIX DU PACK -->
+<div class="choice-overlay" id="choice" aria-hidden="true">
+  <div class="choice-box" role="dialog" aria-modal="true" aria-labelledby="choiceTitle">
+    <button type="button" class="choice-close" id="closeChoice" aria-label="Fermer">×</button>
+    <span class="kicker">ÉMIA Method</span>
+    <h3 id="choiceTitle">Choisis ton <span class="italic">pack</span></h3>
+    <div class="choice-grid">
+      <a class="choice-card" href="https://5f5e-contact.systeme.io/c511d57e-6d7978b1">
+        <span class="choice-tag">Pack Home</span>
+        <strong>ÉMIA Method Home</strong>
+        <small>Pour t'entraîner depuis chez toi</small>
+        <span class="choice-go">Choisir <span class="arrow">→</span></span>
+      </a>
+      <a class="choice-card" href="https://5f5e-contact.systeme.io/c511d57e">
+        <span class="choice-tag">Pack Classique</span>
+        <strong>ÉMIA Method</strong>
+        <small>Le parcours signature ÉMIA</small>
+        <span class="choice-go">Choisir <span class="arrow">→</span></span>
+      </a>
+    </div>
+  </div>
+</div>
+
 <script>
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
-const announceEl=document.getElementById('announce');
-function syncAnnounceH(){
-  document.documentElement.style.setProperty('--announce-h', announceEl.offsetHeight+'px');
-}
-syncAnnounceH();
-window.addEventListener('resize',syncAnnounceH);
-window.addEventListener('load',syncAnnounceH);
-/* COUNTDOWN — échéance fixe : 1er octobre 2026 à 00:00 (heure de Paris, CEST = UTC+2). */
-const end=new Date('2026-10-01T00:00:00+02:00').getTime();
-function pad(n){return String(n).padStart(2,'0')}
-function setCd(cls,v){document.querySelectorAll('.'+cls).forEach(e=>e.textContent=v)}
-function tick(){
-  let d=end-Date.now(); if(d<0)d=0;
-  setCd('js-j',pad(Math.floor(d/86400000)));
-  setCd('js-h',pad(Math.floor(d/3600000)%24));
-  setCd('js-m',pad(Math.floor(d/60000)%60));
-  setCd('js-s',pad(Math.floor(d/1000)%60));
-}
-tick();setInterval(tick,1000);
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const choice=document.getElementById('choice');
+function toggleChoice(open){
+  choice.classList.toggle('open',open);
+  choice.setAttribute('aria-hidden',open?'false':'true');
+  document.body.style.overflow=open?'hidden':'';
+}
+document.getElementById('openChoice').addEventListener('click',()=>toggleChoice(true));
+document.getElementById('closeChoice').addEventListener('click',()=>toggleChoice(false));
+choice.addEventListener('click',e=>{if(e.target===choice)toggleChoice(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')toggleChoice(false)});
 document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>{
   const it=q.parentElement,o=it.classList.contains('open');
   document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
